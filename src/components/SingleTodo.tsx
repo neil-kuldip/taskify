@@ -10,17 +10,22 @@ type Props = {
     todos: Todo[];
     setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
     index: number;
+    oppositeTodos: Todo[];
+    setOppositeTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
 
-const SingleTodo: React.FC<Props> = ({index, todo, todos, setTodos}) => {
+const SingleTodo: React.FC<Props> = ({index, todo, todos, setTodos, oppositeTodos, setOppositeTodos}) => {
     const [edit, setEdit] = useState<boolean>(false);
     const [editTodo, setEditTodo] = useState<string|number>(todo.todo);
 
     const handleDone = (id: number) => {
+        let todoRemove = todos.filter((element) => element.id === id)[0];
+        todoRemove.isDone = !todoRemove.isDone;
         setTodos(
-            todos.map((element) => 
-                element.id === id? {...element,isDone: !element.isDone} : element
-            )
+            todos.filter((element) => element.id !== id)
+        );
+        setOppositeTodos(
+            [...oppositeTodos, todoRemove]
         );
     };
 

@@ -19,6 +19,8 @@ const TodoList : React.FC<Props> = ({ todos, setTodos, completedTodos, setComple
             key={element.id} 
             todos={todos} 
             setTodos={setTodos}
+            oppositeTodos={completedTodos}
+            setOppositeTodos={setCompletedTodos}
         />
     ))
 
@@ -29,6 +31,8 @@ const TodoList : React.FC<Props> = ({ todos, setTodos, completedTodos, setComple
             key={element.id}
             todos={completedTodos}
             setTodos={setCompletedTodos}
+            oppositeTodos={todos}
+            setOppositeTodos={setTodos}
         />
     ))
     return (
